@@ -5,7 +5,7 @@
 # strings into your environment before your app starts. Everything here is also
 # editable in the portal — the file and the form are two views of one thing.
 #
-# Full reference: https://github.com/Bee-Bros-Software/candor-canary#readme
+# Full reference: https://github.com/CandorHost/candor-canary#readme
 
 services:
   # The key is the service name. A repository describing exactly one service
