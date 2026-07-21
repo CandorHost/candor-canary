@@ -74,6 +74,11 @@ as it can, normally well before your first build finishes.
 > uses by default on new projects — it wants `postgresql+psycopg://`. Rewrite
 > the scheme in your app, or set `DATABASE_URL` yourself.
 
+> **MySQL 8 and PyMySQL:** MySQL 8 defaults to `caching_sha2_password`
+> authentication, which PyMySQL cannot do on its own — you get *"'cryptography'
+> package is required"* at connect time. Depend on `PyMySQL[rsa]` rather than
+> plain `PyMySQL`.
+
 ### Generated secrets
 
 ```yaml
