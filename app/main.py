@@ -131,7 +131,10 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/env":
             return self._json(200, {"CANARY_ECHO": ECHO, "stamp": STAMP})
         if path == "/log":
-            print(f"{LOG_MARKER} stamp={STAMP}", flush=True)
+            # Several distinct lines: a log view that mangles newlines, or drops
+            # what it cannot parse, fails this where a single line would pass.
+            for i in range(1, 6):
+                print(f"{LOG_MARKER} line {i} of 5 stamp={STAMP}", flush=True)
             return self._send(200, "logged\n")
         if path == "/all":
             result = run_all()
