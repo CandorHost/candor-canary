@@ -1,0 +1,45 @@
+# .candorfile — how this repository asks to be run.
+#
+# Commit this next to your code and Candor Deploy stops guessing: it builds the
+# right directory, provisions the databases you need, and wires their connection
+# strings into your environment before your app starts. Everything here is also
+# editable in the portal — the file and the form are two views of one thing.
+#
+# Full reference: https://github.com/Bee-Bros-Software/candor-canary#readme
+
+services:
+  # The key is the service name. A repository describing exactly one service
+  # matches whatever you named it in the portal, so this need not agree.
+  canary:
+    # Build from this subdirectory instead of the repository root. Useful for a
+    # monorepo; omit it if your app is at the top level.
+    root: app
+
+    # Ask for databases. Each one is provisioned as its own service and its
+    # connection string is injected once it is ready:
+    #
+    #   postgres -> DATABASE_URL
+    #   mysql    -> MYSQL_URL      (DATABASE_URL is already taken, above)
+    #   redis    -> REDIS_URL
+    #
+    # The first relational engine named wins DATABASE_URL; the other gets an
+    # engine-specific name. Set the variable yourself and we will never
+    # overwrite it.
+    databases: [postgres, mysql, redis]
+
+    env:
+      # A literal — exactly what your app will see.
+      CANARY_ECHO: injected-by-candorfile
+
+      # A secret minted by the platform, never written in your repository.
+      # hex32 is 32 random bytes as 64 hex characters (256-bit).
+      CANARY_SECRET: {generate: hex32}
+
+    # Other options this file supports, unused here:
+    #
+    #   port: 8000                  # only needed when you build from a Dockerfile;
+    #                               # nixpacks-built apps are handed $PORT
+    #   dockerfile: app/Dockerfile  # build with your Dockerfile instead of nixpacks
+    #   builder: nixpacks           # force nixpacks even if a Dockerfile exists
+    #   memory: 1024                # MB, subject to your plan's pool
+    #   kind: worker                # app (default), worker, or static
