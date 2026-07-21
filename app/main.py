@@ -1,9 +1,9 @@
 """Candor Deploy canary — proves each platform capability by exercising it.
 
 Every route here answers a question the platform's own status pages cannot:
-not "did the pod reach Ready" but "can a real client authenticate, write, and
-read back". ``GET /all`` runs every check and reports one verdict, which is what
-the end-to-end runner asserts on.
+not "did it start" but "can a real client authenticate, write, and read back".
+``GET /all`` runs every check and reports one verdict, which is what the
+end-to-end runner asserts on.
 
 Deliberately stdlib for the HTTP layer: the only dependencies are the three
 database drivers, so a build failure is never this app's own fault.

@@ -9,9 +9,9 @@ to each and reading it back. If you want to see what a real Candor Deploy
 repository looks like, read [`.candorfile`](.candorfile) and
 [`app/main.py`](app/main.py) — that is the whole thing.
 
-We deploy this on every platform change. "The pod started" is not the same as
-"a customer's app can authenticate and write", and only the second one is what
-you paid for.
+We deploy this on every platform change. "It started" is not the same as "a
+customer's app can authenticate and write", and only the second one is what you
+paid for.
 
 ---
 
